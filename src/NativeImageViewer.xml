@@ -9,9 +9,16 @@
     </icon>
     <properties>
         <propertyGroup caption="General">
-            <property key="imageToView" type="image">
+            <property key="imageToView" type="image" required="false">
                 <caption>Image to view</caption>
                 <description></description>
+            </property>
+            <property key="imageUrl" type="attribute" required="false">
+                <caption>Image URL</caption>
+                <description>URL of the image to use.</description>
+                <attributeTypes>
+                    <attributeType name="String"/>
+                </attributeTypes>
             </property>
             <property key="imageWidthAttr" type="attribute">
                 <caption>Image width</caption>

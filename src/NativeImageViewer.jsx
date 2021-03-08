@@ -10,8 +10,9 @@ export class NativeImageViewer extends Component {
         windowHeight: Dimensions.get("window").height
     };
     render() {
-        const { imageToView, imageWidthAttr, imageHeightAttr, showModal } = this.props;
-        if (!imageToView || imageToView.status !== "available" || !imageToView.value.uri) {
+        const { imageToView, imageUrl, imageWidthAttr, imageHeightAttr, showModal } = this.props;
+        if ((!imageUrl || imageUrl.status !== "available") &&
+            (!imageToView || imageToView.status !== "available" || !imageToView.value.uri)) {
             return null;
         }
 
@@ -56,7 +57,14 @@ export class NativeImageViewer extends Component {
     renderImage(imageStyle) {
         if (this.state.imageVisible) {
             // console.info("NativeImageViewer render image");
-            return <Image source={this.props.imageToView.value} style={imageStyle} />;
+            if (this.props.imageUrl) { 
+                return <Image source={{
+                    uri: this.props.imageUrl.value
+                }} style={imageStyle} />;
+            } else {
+                return <Image source={this.props.imageToView.value} style={imageStyle} />;
+            }
+            
         } else {
             // console.info("NativeImageViewer skip render image because modal is not shown");
             return null;
